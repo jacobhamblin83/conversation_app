@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app='app' lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body ng-controller='controller'>
+        <form>
+            <input type='text' name='email' ng-model='log_email'/>
+            <input type='text' name='password' ng-model='log_password'/>
+            <button ng-click='get_user({email: log_email, password: log_password})'>Submit</button>
+        </form>
+        {{user.name}}
+        <button ng-click='get_friends()'>see friends</button>
+        <div ng-repeat='friend in friends'>
+            <li><a ng-click='get_friend_friends({id: friend.id})'>{{friend.name}}</a></li>
+        </div>
+        <div ng-repeat='friend in friends_of_friends'>
+            <a>{{friend.name}}</a>
+        </div>
+        
+        <button ng-click='get_conversations()'>see conversations</button>
+        <div ng-repeat='conversation in conversations'>
+            <li><a ng-click='get_conversation_content({id: conversation.id, name: conversation.name})'>{{conversation.name}}</a></li>
+        </div>
+        <h3 ng-show='current_conversation'>{{current_conversation.name}}</h3>
+        <h4 ng-show='current_conversation'>Members</h4>
+        <div ng-repeat='member in conversation_members'>
+            <h5>{{member.name}}</h5>
+        </div>
+        
+        <h3 ng-show='current_conversation'>Posts</h3>
+        <div ng-repeat='post in posts'>
+            <h4>{{post.name}}:</h4><h5>{{post.content}}</h5>
+        </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+    <script src='./js/app.js'></script>
+    <script src='./js/controller.js'></script>
+    <script src='./js/service.js'></script>
+
+    </body>
+</html>
